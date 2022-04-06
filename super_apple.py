@@ -1,3 +1,4 @@
+from re import X
 import pygame
 from pygame.draw import *
 from pygame.locals import K_ESCAPE, KEYDOWN, QUIT
@@ -19,6 +20,7 @@ screen = pygame.display.set_mode(SIZE)
 clock = pygame.time.Clock()
 
 super_apple_img = pygame.image.load("super_apple.png")
+super_apple_img_rect = pygame.get_rect()
 print(super_apple_img)
 
 fruits = [
@@ -31,20 +33,23 @@ while health>0:
     running = True
 
 while running:
+    pygame.event.pump()
     for event in pygame.event.get():
         if event.type == KEYDOWN:
             if event.key == K_ESCAPE:
                 running = False
         elif event.type == QUIT:
             running = False
+        elif event.type == pygame.MOUSEBUTTONDOWN:
+            x, y = event.pos
+            
 
     # GAME STATE UPDATES
     # All game math and comparisons happen here
 
     # DRAWING
     screen.fill((255, 255, 255))  # always the first drawing command
-
-    pygame.draw.circle(screen, (0, 0, 255), (circle_x, circle_y), 30)
+    screen.blit(super_apple_img, super_apple_img_rect)
 
     # Must be the last two lines
     # of the game loop
