@@ -18,8 +18,6 @@ clock = pygame.time.Clock()
 # Initialize global variables
 
 circles = [generate_circle()]
-grow = []
-shrink = []
 frame = 0
 
 # ---------------------------
@@ -43,6 +41,9 @@ while running:
     frame += 1
     if frame%60 == 0:
         circles.append(generate_circle())
+        for circle in circles:
+            if circle.radius <= 0:
+                circles.remove(circle)
     for circle in circles:
         if circle.radius >= 60:
             circle.growth = -1
