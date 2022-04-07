@@ -1,7 +1,7 @@
-from re import X
 import pygame
 from pygame.draw import *
 from pygame.locals import K_ESCAPE, KEYDOWN, QUIT
+from random import randint
 
 pygame.init()
 
@@ -9,23 +9,30 @@ WIDTH = 640
 HEIGHT = 480
 SIZE = (WIDTH, HEIGHT)
 
-class basic_fruit:
-    def __init__(self, x: int, y:int, dx:int, dy:int) -> None:
+screen = pygame.display.set_mode(SIZE)
+clock = pygame.time.Clock()
+
+
+class SuperApple:
+
+    sup_app_img = pygame.image.load("super_apple.png")
+
+    def __init__(self, x: int, y: int, dx: int, dy: int) -> None:
         self.x = x
         self.y = y
         self.dx = dx
         self.dy = dy
+    
+    def transform_apples(image, x:int, y:int):
+        scaled = pygame.transform.scale(image, x, y)
+        x_factor = round(50/x, 2)
+        y_factor = round(50/y, 2)
+        return scaled, x_factor, y_factor
 
-screen = pygame.display.set_mode(SIZE)
-clock = pygame.time.Clock()
+    apple_width = randint(10, 100)
+    apple_height = randint(10, 100)
 
-super_apple_img = pygame.image.load("super_apple.png")
-super_apple_img_rect = pygame.get_rect()
-print(super_apple_img)
-
-fruits = [
-    basic_fruit(20, 20, 50, 50)
-]
+apple_draw = SuperApple()
 
 health = 20
 running = True
@@ -33,23 +40,20 @@ while health>0:
     running = True
 
 while running:
-    pygame.event.pump()
     for event in pygame.event.get():
         if event.type == KEYDOWN:
             if event.key == K_ESCAPE:
                 running = False
         elif event.type == QUIT:
             running = False
-        elif event.type == pygame.MOUSEBUTTONDOWN:
-            x, y = event.pos
             
 
     # GAME STATE UPDATES
     # All game math and comparisons happen here
 
     # DRAWING
-    screen.fill((255, 255, 255))  # always the first drawing command
-    screen.blit(super_apple_img, super_apple_img_rect)
+    screen.fill((255, 255, 255)) # always the first drawing command
+    screen.blit(SuperApple()) 
 
     # Must be the last two lines
     # of the game loop
