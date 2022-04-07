@@ -42,7 +42,7 @@ while running:
     if frame%60 == 0:
         circles.append(generate_circle())
         for circle in circles:
-            if circle.size <= 0:
+            if circle.radius <= 0:
                 circles.remove(circle)
     for circle in circles:
         if circle.radius >= 60:
