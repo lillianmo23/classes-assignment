@@ -18,8 +18,6 @@ class Fruit(pygame.Rect):
         self.image = pygame.image.load(filename)
         self.image = pygame.transform.scale(self.image, (self.width, self.height))
 
-        super().__init__(x, y, self.width, self.height)
-
     def display(self):
         screen.blit(self.image, (self.x, self.y))
 
@@ -129,6 +127,9 @@ while running:
 
 
 pygame.quit()
+
+
+
 
 
 
