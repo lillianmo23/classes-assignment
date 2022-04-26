@@ -28,6 +28,7 @@ class Fruit(pygame.Rect):
         self.x = random.randrange(0, screen.get_width() - self.width)
         self.y = random.randrange(0, screen.get_height() - self.height)
 
+
 class Apple(Fruit):
     def __init__(self, screen: pygame.Surface) -> None:
         #this is to set the Fruit class's filename: str to 'apple.png' to load the image.
@@ -35,7 +36,8 @@ class Apple(Fruit):
     
     def get_score(self):
         return 10
-  
+
+
 class Banana(Fruit):
     def __init__(self, screen: pygame.Surface) -> None:
         super().__init__(IMAGE_PATH + 'banana.png', screen)
