@@ -26,12 +26,11 @@ def init_fruits(screen: pygame.Surface, max_fruits: int, fruits: List, fruit_cla
         fruits.append(fruit_class(screen)) 
 
 
-def click_fruits(screen: pygame.Surface, max_fruits: int, fruits: List, point: Any):
+def click_fruits(screen: pygame.Surface, fruits: List, point: Any):
     """If fruit is clicked, it randomizes new position for fruit and adds score
 
     Args:
         screen: A surface object, the game's screen
-        max_fruits: Maximum number of that particular fruit
         fruits: List of fruit objects
         point: Point clicked on screen
 
@@ -42,7 +41,7 @@ def click_fruits(screen: pygame.Surface, max_fruits: int, fruits: List, point: A
     clicked = False
     score = 0
 
-    for i in range(max_fruits):
+    for i in range(len(fruits)):
         if fruits[i].collidepoint(point):
             fruits[i].set_random_point(screen)
             score += fruits[i].get_score()
@@ -52,17 +51,16 @@ def click_fruits(screen: pygame.Surface, max_fruits: int, fruits: List, point: A
     return clicked, score
 
 
-def display_fruits(screen: pygame.Surface, max_fruits: int, fruits: List) -> None:
+def display_fruits(screen: pygame.Surface, fruits: List) -> None:
     """Displays the fruits on screen.
 
     Args:
         screen: A surface object, the game's screen
-        max_fruits: Maximum number of that particular fruit
         fruits: List of fruit objects
 
     Returns: None
     """
-    for i in range(max_fruits):
+    for i in range(len(fruits)):
             fruits[i].display(screen) 
 
 
@@ -113,10 +111,10 @@ def main():
                 # Increase score when apples and bananas are clicked
                 # Randomize apple and banana positions when clicked
                 
-                click_apple, score_apple = click_fruits(screen, MAX_APPLES, apples, point)
+                click_apple, score_apple = click_fruits(screen, apples, point)
                 total_score += score_apple
                 
-                click_banana, score_banana = click_fruits(screen, MAX_BANANAS, bananas, point)
+                click_banana, score_banana = click_fruits(screen, bananas, point)
                 total_score += score_banana
 
                 # Display score and confirmation when fruits are clicked
@@ -130,8 +128,8 @@ def main():
         # DRAWING
         screen.fill((255, 255, 255))  # always the first drawing command
 
-        display_fruits(screen, MAX_APPLES, apples)
-        display_fruits(screen, MAX_BANANAS, bananas)
+        display_fruits(screen, apples)
+        display_fruits(screen, bananas)
 
         # Must be the last two lines
         # of the game loop
