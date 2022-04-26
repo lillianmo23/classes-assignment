@@ -11,17 +11,34 @@ from fruits import *
 # ---------------------------
 # Functions can be called by other groupmates
 
-def init_fruits(screen: pygame.Surface, max_apples: int, max_bananas: int, apples: List, bananas: List) -> None:
-    # create a list of apples to display on screen
-    for i in range(max_apples):
-        apples.append(Apple(screen)) 
+def init_fruits(screen: pygame.Surface, max_fruits: int, fruits: List, fruit_class) -> None:
+    """Adds fruit objects to lists to display on screen.
+    
+    Args:
+        screen: A surface object, the game's screen
+        max_fruits: Maximum number of that particular fruit
+        fruits: List of fruit objects
+        fruit_class: Class of that particular fruit
 
-    # create a list of bananas to display on screen
-    for i in range(max_bananas):
-        bananas.append(Banana(screen))
+    Returns: None
+    """
+    for i in range(max_fruits):
+        fruits.append(fruit_class(screen)) 
 
 
 def click_fruits(screen: pygame.Surface, max_fruits: int, fruits: List, point: Any):
+    """If fruit is clicked, it randomizes new position for fruit and adds score
+
+    Args:
+        screen: A surface object, the game's screen
+        max_fruits: Maximum number of that particular fruit
+        fruits: List of fruit objects
+        point: Point clicked on screen
+
+    Returns:
+        bool: True if fruit is clicked, False if not
+        int: The score to be added to the total score
+    """
     clicked = False
     score = 0
 
@@ -36,6 +53,15 @@ def click_fruits(screen: pygame.Surface, max_fruits: int, fruits: List, point: A
 
 
 def display_fruits(screen: pygame.Surface, max_fruits: int, fruits: List) -> None:
+    """Displays the fruits on screen.
+
+    Args:
+        screen: A surface object, the game's screen
+        max_fruits: Maximum number of that particular fruit
+        fruits: List of fruit objects
+
+    Returns: None
+    """
     for i in range(max_fruits):
             fruits[i].display(screen) 
 
@@ -62,7 +88,8 @@ def main():
     apples = []
     bananas = []
 
-    init_fruits(screen, MAX_APPLES, MAX_BANANAS, apples, bananas)
+    init_fruits(screen, MAX_APPLES, apples, Apple)
+    init_fruits(screen, MAX_BANANAS, bananas, Banana)
 
     # ---------------------------
     # game loop

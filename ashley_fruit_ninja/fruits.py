@@ -25,6 +25,10 @@ class Fruit(pygame.Rect):
         screen.blit(self.image, (self.x, self.y))
     
     def set_random_point(self, screen: pygame.Surface) -> None:
+        """ Sets the fruit at a random point on the screen.
+
+            Returns: None
+        """
         self.x = random.randrange(0, screen.get_width() - self.width)
         self.y = random.randrange(0, screen.get_height() - self.height)
 
@@ -35,6 +39,11 @@ class Apple(Fruit):
         super().__init__(IMAGE_PATH + 'apple.png', screen)
     
     def get_score(self):
+        """ Gets the score to be added when you click an apple.
+        
+            Returns:
+                int: The amount that an apple adds to the score.
+        """
         return 10
 
 
@@ -43,4 +52,9 @@ class Banana(Fruit):
         super().__init__(IMAGE_PATH + 'banana.png', screen)
 
     def get_score(self):
+        """ Gets the score to be added when you click a banana.
+        
+            Returns:
+                int: The amount that a banana adds to the score.
+        """
         return 5
