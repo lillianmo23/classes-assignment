@@ -1,6 +1,6 @@
 from typing import Any, List
 import pygame
-from fruits import *
+from fruits_classes import *
 
 # ---------------------------
 # Functions can be called by other groupmates

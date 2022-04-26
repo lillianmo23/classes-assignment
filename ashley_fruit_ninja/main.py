@@ -6,7 +6,7 @@
 import pygame
 from pygame.locals import K_ESCAPE, KEYDOWN, MOUSEBUTTONDOWN, QUIT
 from ashley_fruit_ninja import *
-from fruits import *
+from fruits_classes import *
 
 
 def main():
