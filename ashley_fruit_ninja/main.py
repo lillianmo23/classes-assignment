@@ -13,9 +13,9 @@ from ashley_fruit_ninja import *
 def main():
     # initialize pygame
     pygame.init()
-    pygame.display.set_caption("Click the fruits to increase your score! Esc to end game.")
+    pygame.display.set_caption("Click the fruits to increase your score! Click the same fruit 3 times to kill it! Esc to end game.")
 
-    afn_main = AshleyFruitNinja(640, 480)
+    afn_main = AshleyFruitNinja(720, 480)
 
     screen = pygame.display.set_mode((afn_main.get_screen_width(), afn_main.get_screen_height()))
     clock = pygame.time.Clock()

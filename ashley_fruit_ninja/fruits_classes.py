@@ -8,6 +8,20 @@ FRUIT_WIDTH = 100
 FRUIT_HEIGHT = 100
 
 # CLASSES - Create apple and banana classes
+class Lifespan:
+    def __init__(self):
+        self._default_lifespan = 3
+        self.set_lifespan(self._default_lifespan)
+
+    def get_lifespan(self) -> int:
+        return self._lifespan
+    
+    def set_lifespan(self, lifespan: int) -> None:
+        self._lifespan = lifespan
+    
+    def countdown(self):
+        self.set_lifespan(self.get_lifespan() - 1)
+
 
 class Fruit(pygame.Rect):
     def __init__(self, filename: str, screen: pygame.Surface) -> None:
@@ -45,6 +59,9 @@ class Apple(Fruit):
     def __init__(self, screen: pygame.Surface) -> None:
         #this is to set the Fruit class's filename: str to 'apple.png' to load the image.
         super().__init__(IMAGE_PATH + 'apple.png', screen)
+
+        # Aggregated class cannot be inherited. That's why Apple has its own Lifespan()
+        self.lifespan = Lifespan()
     
     def get_score(self):
         """ Gets the score to be added when you click an apple.
@@ -59,6 +76,9 @@ class Banana(Fruit):
     def __init__(self, screen: pygame.Surface) -> None:
         super().__init__(IMAGE_PATH + 'banana.png', screen)
 
+        # Aggregated class cannot be inherited. That's why Banana has its own Lifespan()
+        self.lifespan = Lifespan()
+
     def get_score(self):
         """ Gets the score to be added when you click a banana.
         
@@ -68,11 +88,4 @@ class Banana(Fruit):
         return 5
 
 
-class Behaviour:
-    def __init__(self):
-        self.timer_interval = TimerInterval()
 
-
-class TimerInterval:
-    def __init__(self):
-        pass

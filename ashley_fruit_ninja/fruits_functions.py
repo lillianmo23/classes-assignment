@@ -40,6 +40,11 @@ def click_fruits(screen: pygame.Surface, fruits: List, point: Any):
             fruits[i].set_random_point(screen)
             score += fruits[i].get_score()
             clicked = True
+            
+            # Check if fruit lifespan is up, remove it from the list of fruits
+            fruits[i].lifespan.countdown()
+            if fruits[i].lifespan.get_lifespan() <= 0:
+                fruits.remove(fruits[i])
             break
     
     return clicked, score
