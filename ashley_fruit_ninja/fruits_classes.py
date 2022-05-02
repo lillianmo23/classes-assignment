@@ -11,25 +11,33 @@ FRUIT_HEIGHT = 100
 
 class Fruit(pygame.Rect):
     def __init__(self, filename: str, screen: pygame.Surface) -> None:
-        self.width = FRUIT_WIDTH
+        # cannot make width and height private because they're inherited from pygame.Rect
+        self.width = FRUIT_WIDTH 
         self.height = FRUIT_HEIGHT
-        self.image = pygame.image.load(filename)
-        self.image = pygame.transform.scale(self.image, (self.width, self.height))
+        self.set_image(filename)
         self.set_random_point(screen)
+    
+    def get_image(self) -> pygame.Surface:
+        return self._image
+    
+    def set_image(self, filename: str) -> None:
+        self._image = pygame.image.load(filename)
+        self._image = pygame.transform.scale(self.get_image(), (self.width, self.height))
 
     def display(self, screen: pygame.Surface) -> None: #defined the screen variable in main.py
         """ Displays the Fruit object's image at a coordinate.
 
             Returns: None.
         """
-        screen.blit(self.image, (self.x, self.y))
+        screen.blit(self._image, (self.x, self.y))
     
     def set_random_point(self, screen: pygame.Surface) -> None:
         """ Sets the fruit at a random point on the screen.
 
             Returns: None
         """
-        self.x = random.randrange(0, screen.get_width() - self.width)
+        # cannot make x and y private because they're inherited from pygame.Rect
+        self.x = random.randrange(0, screen.get_width() - self.width) 
         self.y = random.randrange(0, screen.get_height() - self.height)
 
 
@@ -58,3 +66,13 @@ class Banana(Fruit):
                 int: The amount that a banana adds to the score.
         """
         return 5
+
+
+class Behaviour:
+    def __init__(self):
+        self.timer_interval = TimerInterval()
+
+
+class TimerInterval:
+    def __init__(self):
+        pass
