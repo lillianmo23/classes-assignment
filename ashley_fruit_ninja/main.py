@@ -5,8 +5,9 @@
 
 import pygame
 from pygame.locals import K_ESCAPE, KEYDOWN, MOUSEBUTTONDOWN, QUIT
-from ashley_fruit_ninja import *
+from fruits_functions import *
 from fruits_classes import *
+from ashley_fruit_ninja import *
 
 
 def main():
@@ -14,16 +15,13 @@ def main():
     pygame.init()
     pygame.display.set_caption("Click the fruits to increase your score! Esc to end game.")
 
-    SCREEN_WIDTH = 640
-    SCREEN_HEIGHT = 480
-    SCREEN_SIZE = (SCREEN_WIDTH, SCREEN_HEIGHT)
+    afn_main = AshleyFruitNinja(640, 480)
 
-    screen = pygame.display.set_mode(SCREEN_SIZE)
+    screen = pygame.display.set_mode((afn_main.get_screen_width(), afn_main.get_screen_height()))
     clock = pygame.time.Clock()
 
     # ---------------------------
     # Initialize global variables
-    total_score = 0
 
     MAX_APPLES = 3
     MAX_BANANAS = 5
@@ -57,18 +55,18 @@ def main():
                 # Randomize apple and banana positions when clicked
                 
                 click_apple, score_apple = click_fruits(screen, apples, point)
-                total_score += score_apple
+                afn_main.set_total_score(score_apple)
                 
                 click_banana, score_banana = click_fruits(screen, bananas, point)
-                total_score += score_banana
+                afn_main.set_total_score(score_banana)
 
                 # Display score and confirmation when fruits are clicked
                 if click_apple and click_banana: 
-                    pygame.display.set_caption(f"Your score: {total_score}, you got both! Nice punch!")
+                    pygame.display.set_caption(f"Your score: {afn_main.get_total_score()}, you got both! Nice punch!")
                 elif click_apple:
-                    pygame.display.set_caption(f"Your score: {total_score}, bright and shiny!")
+                    pygame.display.set_caption(f"Your score: {afn_main.get_total_score()}, bright and shiny!")
                 elif click_banana:
-                    pygame.display.set_caption(f"Your score: {total_score}, that's bananas!")
+                    pygame.display.set_caption(f"Your score: {afn_main.get_total_score()}, that's bananas!")
 
         # DRAWING
         screen.fill((255, 255, 255))  # always the first drawing command

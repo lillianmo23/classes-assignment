@@ -1,58 +1,27 @@
-from typing import Any, List
-import pygame
-from fruits_classes import *
-
-# ---------------------------
-# Functions can be called by other groupmates
-
-def init_fruits(screen: pygame.Surface, max_fruits: int, fruits: List, fruit_class) -> None:
-    """Adds fruit objects to lists to display on screen.
+class AshleyFruitNinja:
+    def __init__(self, screen_width: int, screen_height: int) -> None:
+        self.set_screen_width(screen_width)
+        self.set_screen_height(screen_height)
+        self.total_score = 0
     
-    Args:
-        screen: A surface object, the game's screen
-        max_fruits: Maximum number of that particular fruit
-        fruits: List of fruit objects
-        fruit_class: Class of that particular fruit
-
-    Returns: None
-    """
-    for i in range(max_fruits):
-        fruits.append(fruit_class(screen)) 
-
-
-def click_fruits(screen: pygame.Surface, fruits: List, point: Any):
-    """If fruit is clicked, it randomizes new position for fruit and adds score
-
-    Args:
-        screen: A surface object, the game's screen
-        fruits: List of fruit objects
-        point: Point clicked on screen
-
-    Returns:
-        bool: True if fruit is clicked, False if not
-        int: The score to be added to the total score
-    """
-    clicked = False
-    score = 0
-
-    for i in range(len(fruits)):
-        if fruits[i].collidepoint(point):
-            fruits[i].set_random_point(screen)
-            score += fruits[i].get_score()
-            clicked = True
-            break
+    def get_screen_width(self) -> int:
+        return self.screen_width
     
-    return clicked, score
+    def set_screen_width(self, screen_width: int) -> None:
+        if screen_width <= 0:
+            raise ValueError("Screen width cannot be set to 0 or less.")
+        self.screen_width = screen_width
+    
+    def get_screen_height(self) -> int:
+        return self.screen_height
 
+    def set_screen_height(self, screen_height: int) -> None:
+        if screen_height <= 0:
+            raise ValueError("Screen height cannot be set to 0 or less.")
+        self.screen_height = screen_height
+    
+    def get_total_score(self) -> int:
+        return self.total_score
 
-def display_fruits(screen: pygame.Surface, fruits: List) -> None:
-    """Displays the fruits on screen.
-
-    Args:
-        screen: A surface object, the game's screen
-        fruits: List of fruit objects
-
-    Returns: None
-    """
-    for i in range(len(fruits)):
-            fruits[i].display(screen) 
+    def set_total_score(self, score_to_add) -> None:
+        self.total_score += score_to_add
